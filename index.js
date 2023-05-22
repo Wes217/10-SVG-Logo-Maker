@@ -1,7 +1,6 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 const { Circle, Triangle, Square } = require('./lib/shapes');
-const { shallowEqual } = require('@babel/types');
 
 inquirer
 .prompt([
@@ -15,18 +14,23 @@ inquirer
     name:'shape',
     message:'Select a shape',
     choices:[Triangle, Circle, Square]
+  },
+  {
+    type:'input',
+    name:'shapeColor',
+    message:'Shape color',
   }
 ])
 .then((data) => {
   switch(data.shape){
     case 'Triangle':
-      shape = new Triangle(0,0,100)
+      shape = new Triangle()
     break;
     case 'Circle':
       shape = new Circle(150,100,100)
     break;
     case 'Square':
-      shape = new Square(0,0,100)
+      shape = new Square(75,25,100)
     break;
   }
 
@@ -37,9 +41,9 @@ inquirer
 
   <rect width="100%" height="100%" fill="red" />
 
-  ${shape.render()}
+  ${shape.render(data.shapeColor)}
 
-  <text x="150" y="125" font-size="60" text-anchor="middle" fill="white">SVG</text>
+  <text x="150" y="125" font-size="60" text-anchor="middle" fill="white">${data.text}</text>
 
 </svg>`
 
