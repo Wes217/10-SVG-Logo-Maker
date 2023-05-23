@@ -1,13 +1,15 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 const { Circle, Triangle, Square } = require('./lib/shapes');
+const {checkTextInput, checkColorInput} = require('./lib/validate')
 
 inquirer
 .prompt([
   {
     type:'input',
     name:'text',
-    message:'Enter Characters'
+    message:'Enter Characters',
+    validate: checkTextInput
   },
   {
     type:'list',
@@ -19,6 +21,7 @@ inquirer
     type:'input',
     name:'shapeColor',
     message:'Shape color',
+    validate: checkColorInput
   }
 ])
 .then((data) => {
@@ -54,8 +57,6 @@ console.log('Generated logo.svg')
 })
 
 
-// WHEN I am prompted for text
-// THEN I can enter up to three characters
 // WHEN I am prompted for the text color
 // THEN I can enter a color keyword (OR a hexadecimal number)
 // WHEN I am prompted for the shape's color
