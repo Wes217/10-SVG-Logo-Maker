@@ -8,8 +8,14 @@ inquirer
   {
     type:'input',
     name:'text',
-    message:'Enter Characters',
+    message:'Enter up to three Characters',
     validate: checkTextInput
+  },
+  {
+    type:'input',
+    name:'textColor',
+    message:'Text color?',
+    validate: checkColorInput
   },
   {
     type:'list',
@@ -20,7 +26,7 @@ inquirer
   {
     type:'input',
     name:'shapeColor',
-    message:'Shape color',
+    message:'Shape color?',
     validate: checkColorInput
   }
 ])
@@ -42,11 +48,11 @@ inquirer
      width="300" height="200"
      xmlns="http://www.w3.org/2000/svg">
 
-  <rect width="100%" height="100%" fill="red" />
+  <rect width="100%" height="100%" fill="white" />
 
   ${shape.render(data.shapeColor)}
 
-  <text x="150" y="125" font-size="60" text-anchor="middle" fill="white">${data.text}</text>
+  <text x="150" y="125" font-size="60" text-anchor="middle" fill="${data.textColor}">${data.text}</text>
 
 </svg>`
 
@@ -55,12 +61,6 @@ fs.writeFile('./examples/Logo.svg',svg, (err) => {
 })
 console.log('Generated logo.svg')
 })
-
-
-// WHEN I am prompted for the text color
-// THEN I can enter a color keyword (OR a hexadecimal number)
-// WHEN I am prompted for the shape's color
-// THEN I can enter a color keyword (OR a hexadecimal number)
 
 
 
